@@ -47,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   int loading;
 
-  String uploadingFileName;
+  List<String> uploadingFileNames = <String>[];
 
   int pageIndex;
   int pageSize;
@@ -89,13 +89,15 @@ class _MyHomePageState extends State<MyHomePage> {
       padding: EdgeInsets.all(5),
       child: Column(
         children: [
-          fileName == this.uploadingFileName
+          this.uploadingFileNames?.contains(fileName) ?? false
               ? Icon(
                   Icons.upload_file,
                   color: Colors.green,
                 )
               : Icon(Icons.file_present),
-          Text((fileName == this.uploadingFileName ? "uploading " : "") +
+          Text((this.uploadingFileNames?.contains(fileName) ?? false
+                  ? "uploading "
+                  : "") +
               (fileName.length > 10
                   ? fileName.substring(0, 10) + ".."
                   : fileName)),
@@ -249,7 +251,8 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<void> _uploadFiles(List<PlatformFile> files) async {
-    files.forEach((f) {
+    for (int i = 0; i < files.length; i++) {
+      PlatformFile f = files[i];
       var fileName = this.fileNames.firstWhere(
           (fileName) => fileName["originName"] == f.name)["uniqueName"];
       FormData data = new FormData.fromMap({
@@ -259,24 +262,25 @@ class _MyHomePageState extends State<MyHomePage> {
 
       this.startLoading();
       this.setState(() {
-        this.uploadingFileName = f.name;
+        this.uploadingFileNames?.add(f.name);
       });
-      Dio()
+      var resp = await Dio()
           .post("https://simplisync.oss-cn-beijing.aliyuncs.com", data: data)
           .whenComplete(() {
         this.loadingCompelete();
         this.setState(() {
-          this.uploadingFileName = null;
+          this.uploadingFileNames?.remove(f.name);
         });
-      }).then((resp) {
+      });
+      {
         if (resp.statusCode == 204) {
           this.setState(() {
             this.fileNames = this.fileNames
               ..removeWhere((fileName) => fileName["originName"] == f.name);
           });
         }
-      });
-    });
+      }
+    }
     this.files.clear();
   }
 
@@ -336,9 +340,10 @@ class _MyHomePageState extends State<MyHomePage> {
     this.fetchData(pageChange: pageChange);
   }
 
-  void _updateAuthAndPush(String auth) {
+  void _updateAuthAndPush(String auth, {bool pushData = true}) {
     if (auth != null && auth != "Default") {
-      this._setAuth(auth, afterSetting: (v) => this._sendData(auth: v));
+      this._setAuth(auth,
+          afterSetting: pushData ? (v) => this._sendData(auth: v) : null);
     }
   }
 
@@ -475,7 +480,10 @@ class _MyHomePageState extends State<MyHomePage> {
             child: DragTarget(
               onAccept: (v) {
                 this._showAuthInputDialog(
-                    onApprove: (v) => this._updateAuthAndPush(v));
+                    onApprove: (v) => this._updateAuthAndPush(v,
+                        pushData: ((this.textEditingController.text != null &&
+                                this.textEditingController.text.isNotEmpty) ||
+                            (this.files?.isNotEmpty ?? false))));
               },
               builder: (
                 BuildContext context,
@@ -573,6 +581,14 @@ class _MyHomePageState extends State<MyHomePage> {
             Padding(
               padding: EdgeInsets.only(top: 20),
               child: Text("Input then Sync to all platform"),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 20),
+              child: Text("Feel free to contact me for any question or suggestion."),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 10),
+              child: Text("zouheng613@163.com"),
             ),
             Padding(
               padding: EdgeInsets.only(top: 30),
