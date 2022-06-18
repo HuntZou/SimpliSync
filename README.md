@@ -14,6 +14,8 @@ github page release:
 - Step 4:
 > Copy all files from `build/web/` to `docs/`, where gitpage used.
 - Step 5:
+> Create a file named "CNAME" in docs/, contented "simplisync.icu". which used for custom domain for gitpage
+- Step 6:
 > Commit and push.
 
 note:
