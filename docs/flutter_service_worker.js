@@ -5,8 +5,8 @@ const CACHE_NAME = 'flutter-app-cache';
 const RESOURCES = {
   "assets/AssetManifest.json": "2efbb41d7877d10aac9d091f58ccd7b9",
 "assets/FontManifest.json": "dc3d03800ccca4601324923c0b1d6d57",
-"assets/fonts/MaterialIcons-Regular.otf": "1288c9e28052e028aba623321f7826ac",
-"assets/NOTICES": "d041592bd140a928f5d435994c6dde7f",
+"assets/fonts/MaterialIcons-Regular.otf": "95db9098c58fd6db106f1116bae85a0b",
+"assets/NOTICES": "ab8d50618b854d4a94556984eec33c35",
 "assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "6d342eb68f170c97609e9da345464e5e",
 "favicon.png": "5dcef449791fa27946b3d35ad8803796",
 "icons/android-icon-144x144.png": "817f71e010c6d841f672b782c80cf0e1",
@@ -38,18 +38,17 @@ const RESOURCES = {
 "icons/ms-icon-150x150.png": "ab911c70268afcf20128479172cb9633",
 "icons/ms-icon-310x310.png": "b9eeadae632bf5e20ecaf2fde0b05914",
 "icons/ms-icon-70x70.png": "daf3cfee3294ff40e1156407e787cf8b",
-"index.html": "5baf4516fd423f92bec7915b83c5f04a",
-"/": "5baf4516fd423f92bec7915b83c5f04a",
-"main.dart.js": "e7ed1da3ee20589b6f1b01ee915c1a52",
+"index.html": "aa1d45f806acd688cec88472821f2bd1",
+"/": "aa1d45f806acd688cec88472821f2bd1",
+"main.dart.js": "cc4cdcba58405ca3bfccff978e59f41c",
 "manifest.json": "75c505aba4e924b7680ae567a532d192",
-"version.json": "f2a85f9aeddfae57c7483fa3b7b25206"
+"version.json": "44dbbc055edbe3ddc1c994d64d00dcc6"
 };
 
 // The application shell files that are downloaded before a service worker can
 // start.
 const CORE = [
-  "/",
-"main.dart.js",
+  "main.dart.js",
 "index.html",
 "assets/NOTICES",
 "assets/AssetManifest.json",
@@ -60,7 +59,7 @@ self.addEventListener("install", (event) => {
   return event.waitUntil(
     caches.open(TEMP).then((cache) => {
       return cache.addAll(
-        CORE.map((value) => new Request(value + '?revision=' + RESOURCES[value], {'cache': 'reload'})));
+        CORE.map((value) => new Request(value, {'cache': 'reload'})));
     })
   );
 });

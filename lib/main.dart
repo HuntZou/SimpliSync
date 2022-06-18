@@ -579,14 +579,6 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.only(top: 20),
-              child: Text("Input then Sync to all platform"),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: 20),
-              child: Text("Feel free to contact me for any question or suggestion."),
-            ),
-            Padding(
               padding: EdgeInsets.only(top: 10),
               child: Text("zouheng613@163.com"),
             ),
