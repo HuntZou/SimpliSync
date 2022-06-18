@@ -24300,7 +24300,7 @@ r4(a){return A.Y2(new A.td("Paste is not implemented for this browser."),null,t.
 A.df.prototype={
 gu8(a){var s=this.a
 s=s==null?null:J.aw7(s)
-return s==null?"https://cdn.jsdelivr.net/npm/canvaskit-wasm@0.33.0/bin/":s},
+return s==null?"https://simplisync.oss-cn-beijing.aliyuncs.com/cdn/":s},
 gu9(a){var s=this.a
 s=s==null?null:J.aw8(s)
 return s==null?!1:s},

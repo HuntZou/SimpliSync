@@ -1,11 +1,11 @@
 {
-    "name": "synccloud",
-    "short_name": "synccloud",
-    "start_url": ".",
+    "name": "simplisync",
+    "short_name": "simplisync",
+    "start_url": "./",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Simplify your sync",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
