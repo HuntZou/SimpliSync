@@ -10,7 +10,10 @@ github page release:
 > Run `flutter run -d edge` for test.
 - Step 3:
 > Run `flutter build web`.
+
 > Or `flutter build web --dart-define=FLUTTER_WEB_CANVASKIT_URL=https://simplisync.oss-cn-beijing.aliyuncs.com/cdn/ --release` for performance. since sources(canvaskit.wasm & canvaskit.js) loaded from oversea by default.
+
+> Or `flutter build web --web-renderer html` by using native html node rather canvaskit.wasm
 - Step 4:
 > Copy all files from `build/web/` to `docs/`, where gitpage used.
 - Step 5:
