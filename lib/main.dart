@@ -143,7 +143,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     this.startLoading();
     Dio().post(
-        "https://${appId.substring(0, 8)}.api.lncldglobal.com/1.1/classes/SyncContent",
+        "https://sync.woyou.cool/1.1/classes/SyncContent",
         options: Options(headers: {
           "X-LC-Id": appId,
           "X-LC-Key": appKey,
@@ -202,7 +202,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     Dio()
         .get(
-          "https://${appId.substring(0, 8)}.api.lncldglobal.com/1.1/classes/SyncContent",
+          "https://sync.woyou.cool/1.1/classes/SyncContent",
           queryParameters: {
             "limit": this.pageSize,
             "skip": this.pageSize * this.pageIndex,
@@ -923,7 +923,7 @@ class _DataListItemState extends State<DataListItem> {
 
     Dio()
         .delete(
-      "https://${appId.substring(0, 8)}.api.lncldglobal.com/1.1/classes/SyncContent/$objectId",
+      "https://sync.woyou.cool/1.1/classes/SyncContent/$objectId",
       options: Options(headers: {
         "X-LC-Id": appId,
         "X-LC-Key": appKey,
